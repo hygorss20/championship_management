@@ -25,3 +25,14 @@ http://localhost:8080/h2/
 username=spring
 
 password=spring
+
+# PARA CRIAÇÂO DE NOVOS ENDPOINTS SEGUROS
+
+para que o novo endPoint seja protegido bastar passar o paramentro
+
+@SecurityRequirement(name = "finalaws")
+
+segue login e senha para acesso dos endpoints: 
+
+Login: finalAWS
+Senha: admin
