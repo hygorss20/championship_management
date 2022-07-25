@@ -36,3 +36,10 @@ segue login e senha para acesso dos endpoints:
 
 Login: finalAWS
 Senha: admin
+
+
+# Enviar mensagens de eventos da partida para o RabbitMQ
+1. Subir o RabbitMQ. Segue exemplo usando docker.
+
+docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.10-management
+
