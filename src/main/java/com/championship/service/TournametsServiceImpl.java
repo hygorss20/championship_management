@@ -33,33 +33,28 @@ public class TournametsServiceImpl implements TournamentsService {
 		return tournametsRepository.save(tournaments);
 	}
 
-
 	@Override
-	public void deletar(Tournaments players) {
-		// TODO Auto-generated method stub
-		
+	public void deletar(Tournaments tournaments) {
+		//TODO
 	}
-
 
 	@Override
 	public List<Tournaments> listarTournaments() {
-		// TODO Auto-generated method stub
-		return null;
+		return tournametsRepository.findAll();
 	}
 
 
 	@Override
 	public Tournaments buscarTournamentsPorId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		var tournament = tournametsRepository.findById(id);
+
+		if (tournament.isPresent()) return tournament.get();
+		else return null;
 	}
 
 
 	@Override
 	public void deletarPorId(Long id) {
-		// TODO Auto-generated method stub
-		
+		tournametsRepository.deleteById(id);
 	}
-
-
 }

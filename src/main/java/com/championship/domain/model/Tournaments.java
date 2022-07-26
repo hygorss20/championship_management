@@ -1,15 +1,11 @@
 package com.championship.domain.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -34,11 +30,7 @@ public class Tournaments {
 	
 	@Column(name="DATA_FIM_TORNEIO", nullable=false, length=512)
 	private String dataFimTorneio;	
-	
-	@ManyToOne
-	@JoinColumn(name="ID_TEAMS")
-	private Teams time;
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -88,13 +80,4 @@ public class Tournaments {
 	public void setDataFimTorneio(String dataFimTorneio) {
 		this.dataFimTorneio = dataFimTorneio;
 	}
-
-	public Teams getTime() {
-		return time;
-	}
-
-	public void setTime(Teams time) {
-		this.time = time;
-	}	
-	
 }

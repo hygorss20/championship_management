@@ -1,13 +1,18 @@
 package com.championship.domain.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import com.championship.domain.model.Teams;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @ApiModel(description = "Modelo do objeto Torneio.")
 public class TournamentsDTO 
@@ -70,7 +75,4 @@ public class TournamentsDTO
 	public void setDataFimTorneio(LocalDate dataFimTorneio) {
 		this.dataFimTorneio = dataFimTorneio;
 	}
-    
-    
-
 }
