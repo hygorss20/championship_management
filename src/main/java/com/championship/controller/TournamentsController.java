@@ -2,7 +2,10 @@ package com.championship.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.championship.domain.dto.TournamentsDTO;
+import com.championship.domain.mapper.PlayersMapper;
+import com.championship.domain.mapper.TournamentsMapper;
+import com.championship.domain.model.Tournaments;
+import com.championship.service.PlayersService;
+import com.championship.service.TeamsService;
+import com.championship.service.TournamentsService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,6 +34,13 @@ import io.swagger.annotations.ApiOperation;
 public class TournamentsController 
 {
 	
+	@Autowired
+	private TournamentsService tournamentsService;
+	
+	@Autowired
+	private final TournamentsMapper tournamentsMapper = Mappers.getMapper(TournamentsMapper.class);
+	
+	
 	@PostMapping
 	@ApiOperation(value = "Criar um novo Torneio.")
 	public ResponseEntity<TournamentsDTO> inserirTime(@RequestBody TournamentsDTO dto){
@@ -34,7 +50,11 @@ public class TournamentsController
 		//TeamsResponseDTO usuarioDTO = teamsMapper.teamsToTeamsResponseDTO(time);
 		//return ResponseEntity.ok(usuarioDTO);
 		
-		return ResponseEntity.ok(dto);
+		Tournaments tournaments =  tournamentsMapper.toEntity(dto);
+		tournaments = tournamentsService.salvar(tournaments);
+		TournamentsDTO tournamentsDTO = tournamentsMapper.tournamentsToTournamentsResponseDTO(tournaments);
+				
+		return ResponseEntity.ok(tournamentsDTO);
 	}
 	
 	@PutMapping("/{id}")
@@ -72,9 +92,16 @@ public class TournamentsController
 				.collect(Collectors.toList());
 		return ResponseEntity.ok(listaPlayersResponseDTO);*/
 		
-		ArrayList list = new ArrayList<TournamentsDTO>();
+		List<TournamentsDTO> listaTournamentsDTO = tournamentsService.listarTournaments()
+				.stream()
+				.map(tournamentsMapper::tournamentsToTournamentsResponseDTO)
+				.collect(Collectors.toList());
 		
-		return ResponseEntity.ok(list);
+		return ResponseEntity.ok(listaTournamentsDTO);
+		
+		//ArrayList list = new ArrayList<TournamentsDTO>();
+		
+		//return ResponseEntity.ok(list);
 	}
 
 	@DeleteMapping("/{id}")
