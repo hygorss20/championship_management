@@ -12,6 +12,7 @@ import com.championship.rabbitmq.Producer;
 import com.championship.repository.EventRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.server.ServerWebInputException;
 
 @Service("EventService")
 public class EventServiceImpl implements EventService {
@@ -26,7 +27,7 @@ public class EventServiceImpl implements EventService {
 	public Event salvar(Event event) {
 		
 		if(StringHelper.isEmpty(event.getTipo()))
-			throw new ViolacaoDeRegraEx("Tipo do evento não pode ser vazio");
+			throw new ServerWebInputException("Tipo do evento não pode ser vazio");
 		
 		return eventRepository.save(event);
 	}

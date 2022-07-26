@@ -18,5 +18,4 @@ public class Producer {
 		rabbitTemplate.convertAndSend(queue.getName(), msg);
 		System.out.println("Sent: " + msg);
 	}
-
 }

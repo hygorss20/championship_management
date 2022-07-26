@@ -11,6 +11,7 @@ import com.championship.repository.TeamsRepository;
 import org.hibernate.internal.util.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ServerWebInputException;
 
 @Service("TeamsService")
 public class TeamsServiceImpl implements TeamsService {
@@ -23,9 +24,9 @@ public class TeamsServiceImpl implements TeamsService {
 	public Teams salvar(Teams teams) {
 		
 		if(StringHelper.isEmpty(teams.getNome()))
-			throw new ViolacaoDeRegraEx("Nome para o time não pode ser vazio");
+			throw new ServerWebInputException("Nome para o time não pode ser vazio");
 		else if(StringHelper.isEmpty(teams.getLocalidade()))
-			throw new ViolacaoDeRegraEx("Localização para o time não pode ser vazio");
+			throw new ServerWebInputException("Localização para o time não pode ser vazio");
 
 		return teamsRepository.save(teams);
 	}
