@@ -11,9 +11,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description = "Modelo do objeto eventos.")
 public class EventDTO {
-	
-    @ApiModelProperty(notes = "Tipo do evento.")
-    private String tipo;
 
     @ApiModelProperty(notes = "Uma descrição para o evento.", example = "Começa o jogo que promete pegar fogo")
     private String descricao;
@@ -21,14 +18,6 @@ public class EventDTO {
     @ApiModelProperty(notes = "Data do evento.", example = "2022-07-24T19:02:41.183")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime data;
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
 
 	public String getDescricao() {
 		return descricao;

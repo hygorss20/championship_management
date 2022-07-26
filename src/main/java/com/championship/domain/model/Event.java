@@ -23,7 +23,6 @@ public class Event {
 	@Column(name="TIPO", nullable=false, length=512)
 	private String tipo;
 	
-
 	@Column(name="DESCRICAO", nullable=false, length=512)
 	private String descricao;
 	
